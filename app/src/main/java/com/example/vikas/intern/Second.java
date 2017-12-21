@@ -37,12 +37,6 @@ public class Second extends Activity{
         email1 = (EditText) findViewById(R.id.email1);
         pass1 = (EditText) findViewById(R.id.pass1);
 
-        /*Intent activity = new Intent(ActivityB.this,ActivityC.class);
-                Bundle bundle= new Bundle();
-                bundle.putString("secret","VIKASH");
-                bundle.putString("second_secret","VIKASH_NAME");
-                activity.putExtra("add",bundle);
-        startActivity(activity);*/
 
 
         button.setOnClickListener(new View.OnClickListener() {

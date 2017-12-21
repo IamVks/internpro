@@ -39,9 +39,8 @@ public class MainActivity extends TabActivity {
         Intent profileIntent = new Intent(this, Third.class);
         profileSpec.setContent(profileIntent);
 
-        // Adding all TabSpec to TabHost
-        tabHost.addTab(inboxSpec); // Adding Inbox tab
-        tabHost.addTab(outboxSpec); // Adding Outbox tab
-        tabHost.addTab(profileSpec); // Adding Profile tab
+        tabHost.addTab(inboxSpec);
+        tabHost.addTab(outboxSpec);
+        tabHost.addTab(profileSpec);
     }
 }
