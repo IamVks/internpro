@@ -48,6 +48,8 @@ public class Second extends Activity{
                                           String str3 = pass1.getText().toString();
 
                                           sendData(str1, str2, str3);
+
+
                                       }
                                   }
         );

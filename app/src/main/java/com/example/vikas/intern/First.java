@@ -2,19 +2,21 @@ package com.example.vikas.intern;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
-
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,6 +29,12 @@ import java.util.ArrayList;
 
 public class First  extends Activity {
 
+    private static final String TAG = "MainActivity";
+
+    DatabaseHelper mDatabaseHelper;
+    private Button btnAdd;
+    private EditText editText;
+
     ListView fruitsList;
     String url = "https://www.thecrazyprogrammer.com/example_data/fruits_array.json";
     ProgressDialog dialog;
@@ -35,6 +43,27 @@ public class First  extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fruits);
+
+        editText = (EditText) findViewById(R.id.tvs);
+        btnAdd = (Button) findViewById(R.id.btnAdd);
+
+        mDatabaseHelper = new DatabaseHelper(this);
+
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String newEntry = editText.getText().toString();
+
+                if (editText.length() != 0) {
+                    AddData(newEntry);
+                    editText.setText("");
+                } else {
+                    toastMessage("You must put something in the text field!");
+                }
+
+            }
+        });
+
 
         fruitsList = (ListView)findViewById(R.id.myfruits);
 
@@ -77,6 +106,23 @@ public class First  extends Activity {
 
         dialog.dismiss();
     }
+
+    public void AddData(String newEntry) {
+        boolean insertData = mDatabaseHelper.addData(newEntry);
+
+        if (insertData) {
+            toastMessage("Data Successfully Inserted!");
+        } else {
+            toastMessage("Something went wrong");
+        }
+    }
+
+    private void toastMessage(String message){
+        Toast.makeText(this,message, Toast.LENGTH_SHORT).show();
+    }
+
+
+
 }
 
 
